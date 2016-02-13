@@ -76,18 +76,17 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
   local screen = win:screen()
   local max = screen:frame()
 
+    f.x = max.x
+    f.y = max.y
+
   if cornerNum <= 4 and cornerNum >= 1 then
 
     if cornerNum > 1 then
         cornerNum = cornerNum - 1 
     end
     
-    if cornerNum == 1 then
-        f.x = max.x
-        f.y = max.y
-    elseif cornerNum == 2 then
+    if cornerNum == 2 then
         f.x = max.x + (max.w / 2)
-        f.y = max.y
     elseif cornerNum == 3 then
         f.x = max.x
         f.y = max.y + (max.h / 2)
@@ -109,19 +108,17 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
   local screen = win:screen()
   local max = screen:frame()
 
+    f.x = max.x
+    f.y = max.y
+
   if cornerNum <= 4 and cornerNum >= 1 then
     if cornerNum < 4 then
         cornerNum = cornerNum + 1 
     end
 
-    if cornerNum == 1 then
-        f.x = max.x
-        f.y = max.y
-    elseif cornerNum == 2 then
+    if cornerNum == 2 then
         f.x = max.x + (max.w / 2)
-        f.y = max.y
     elseif cornerNum == 3 then
-        f.x = max.x
         f.y = max.y + (max.h / 2)
     elseif cornerNum == 4 then
         f.x = max.x + (max.w / 2)
