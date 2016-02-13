@@ -1,6 +1,6 @@
-numLeft = 0;
-numRight = 0;
-cornerNum = 1;
+numLeft = 0
+numRight = 0
+cornerNum = 1
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
     local win = hs.window.focusedWindow()
@@ -8,7 +8,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
     local screen = win:screen()
     local max = screen:frame()
 
-    numRight = 0;
+    numRight = 0
     
     if numLeft < 3 then
         numLeft = numLeft + 1
