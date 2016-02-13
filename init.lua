@@ -2,6 +2,8 @@ numLeft = 0
 numRight = 0
 cornerNum = 1
 
+hs.window.animationDuration = 0.1
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
