@@ -105,6 +105,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
             f.x = max.x + (max.w / 2)
             f.y = max.y + (max.h / 2)
         elseif cornerNum == 8 then
+            f.w = max.w / 3
             f.x = max.x + (2 * max.w / 3)
             f.y = max.y + (max.h / 2)
         end
@@ -147,6 +148,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
             f.x = max.x + (max.w / 2)
             f.y = max.y + (max.h / 2)
         elseif cornerNum == 8 then
+            f.w = max.w / 3
             f.x = max.x + (2 * max.w / 3)
             f.y = max.y + (max.h / 2)
         end
