@@ -3,10 +3,10 @@ numRight = 0;
 cornerNum = 1;
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
     numRight = 0;
     
@@ -30,10 +30,10 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
     numLeft = 0;
     
@@ -58,76 +58,76 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "F", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w
+    f.h = max.h
+    win:setFrame(f)
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
     f.x = max.x
     f.y = max.y
 
-  if cornerNum <= 4 and cornerNum >= 1 then
+    if cornerNum <= 4 and cornerNum >= 1 then
 
-    if cornerNum > 1 then
-        cornerNum = cornerNum - 1 
+        if cornerNum > 1 then
+            cornerNum = cornerNum - 1 
+        end
+        
+        if cornerNum == 2 then
+            f.x = max.x + (max.w / 2)
+        elseif cornerNum == 3 then
+            f.y = max.y + (max.h / 2)
+        elseif cornerNum == 4 then
+            f.x = max.x + (max.w / 2)
+            f.y = max.y + (max.h / 2)
+        end
+
     end
-    
-    if cornerNum == 2 then
-        f.x = max.x + (max.w / 2)
-    elseif cornerNum == 3 then
-        f.x = max.x
-        f.y = max.y + (max.h / 2)
-    elseif cornerNum == 4 then
-        f.x = max.x + (max.w / 2)
-        f.y = max.y + (max.h / 2)
-    end
 
-  end
-
-  f.w = max.w / 2
-  f.h = max.h / 2
-  win:setFrame(f)
+    f.w = max.w / 2
+    f.h = max.h / 2
+    win:setFrame(f)
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
     f.x = max.x
     f.y = max.y
 
-  if cornerNum <= 4 and cornerNum >= 1 then
-    if cornerNum < 4 then
-        cornerNum = cornerNum + 1 
+    if cornerNum <= 4 and cornerNum >= 1 then
+        
+        if cornerNum < 4 then
+            cornerNum = cornerNum + 1 
+        end
+
+        if cornerNum == 2 then
+            f.x = max.x + (max.w / 2)
+        elseif cornerNum == 3 then
+            f.y = max.y + (max.h / 2)
+        elseif cornerNum == 4 then
+            f.x = max.x + (max.w / 2)
+            f.y = max.y + (max.h / 2)
+        end
+
     end
 
-    if cornerNum == 2 then
-        f.x = max.x + (max.w / 2)
-    elseif cornerNum == 3 then
-        f.y = max.y + (max.h / 2)
-    elseif cornerNum == 4 then
-        f.x = max.x + (max.w / 2)
-        f.y = max.y + (max.h / 2)
-    end
-
-  end
-
-  f.w = max.w / 2
-  f.h = max.h / 2
-  win:setFrame(f)
+    f.w = max.w / 2
+    f.h = max.h / 2
+    win:setFrame(f)
 end)
