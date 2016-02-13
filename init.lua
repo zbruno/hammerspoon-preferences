@@ -133,3 +133,14 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
     f.h = max.h / 2
     win:setFrame(f)
 end)
+
+
+hs.hotkey.bind({"cmd", "ctrl"}, "left", function()
+    local win = hs.window.focusedWindow()
+    win:moveOneScreenWest()
+end)
+
+hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
+    local win = hs.window.focusedWindow()
+    win:moveOneScreenEast()
+end)
