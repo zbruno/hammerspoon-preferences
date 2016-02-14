@@ -11,24 +11,22 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
     local max = screen:frame()
 
     numRight = 0
-    
-    if numLeft < 3 then
-        numLeft = numLeft + 1
-            
-        if numLeft == 1 then
-            f.w = (2 * max.w) / 3
-        elseif numLeft == 2 then
-            f.w = max.w / 2
-        elseif numLeft == 3 then
-            f.w = max.w / 3
-        end
-                    
-        f.x = max.x
-        f.y = max.y
-        f.h = max.h
-        win:setFrame(f)
+    numLeft = numLeft + 1
+
+    if numLeft == 1 then
+        f.w = (2 * max.w) / 3
+    elseif numLeft == 2 then
+        f.w = max.w / 2
+    elseif numLeft == 3 then
+        f.w = max.w / 3
+        numLeft = 0;
     end
-        
+
+    f.x = max.x
+    f.y = max.y
+    f.h = max.h
+    win:setFrame(f)
+
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
@@ -37,26 +35,25 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
     local screen = win:screen()
     local max = screen:frame()
 
-    numLeft = 0;
-    
-    if numRight < 3 then
-        numRight = numRight + 1
-            
-        if numRight == 1 then
-            f.w = (2 * max.w) / 3
-            f.x = max.x + (max.w / 3)
-        elseif numRight == 2 then
-            f.w = max.w / 2
-            f.x = max.x + (max.w / 2)
-        elseif numRight == 3 then
-            f.w = max.w / 3
-            f.x = max.x + (2 * max.w / 3)
-        end
-                    
-        f.y = max.y
-        f.h = max.h
-        win:setFrame(f)
+    numLeft = 0
+    numRight = numRight + 1
+
+    if numRight == 1 then
+        f.w = (2 * max.w) / 3
+        f.x = max.x + (max.w / 3)
+    elseif numRight == 2 then
+        f.w = max.w / 2
+        f.x = max.x + (max.w / 2)
+    elseif numRight == 3 then
+        f.w = max.w / 3
+        f.x = max.x + (2 * max.w / 3)
+        numRight = 0
     end
+    
+    f.y = max.y
+    f.h = max.h
+    win:setFrame(f)
+
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "F", function()
