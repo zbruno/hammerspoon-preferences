@@ -166,3 +166,15 @@ hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
     local win = hs.window.focusedWindow()
     win:moveOneScreenEast()
 end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f7", function()
+    hs.spotify.next()
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f6", function()
+    hs.spotify.playpause()
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f5", function()
+    hs.spotify.previous()
+end)
