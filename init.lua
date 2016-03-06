@@ -64,7 +64,6 @@ function toggle_size(_direction)
     local win = hs.window.focusedWindow()
 
     if _direction == 'left' then
-        numSplit = 0
         numSplit = numSplit + 1
 
         if numSplit == 1 then
@@ -77,7 +76,6 @@ function toggle_size(_direction)
         end
 
     elseif _direction == 'right' then
-        numLeft = 0
         numSplit = numSplit + 1
 
         if numSplit == 1 then
