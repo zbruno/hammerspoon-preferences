@@ -112,8 +112,11 @@ hs.hotkey.bind(hyper, 'pad1', function() hs.window.focusedWindow():moveOneScreen
 hs.hotkey.bind(hyper, 'pad2', function() hs.window.focusedWindow():moveOneScreenEast() end)
 hs.hotkey.bind(hyper, 'f', function() hs.grid.maximizeWindow(hs.window.focusedWindow()) end)
 
+-- Open all work apps
+hs.hotkey.bind(hyper, '9', function() set_up_work_environment() end)
+
 -- Hotkeys to trigger defined layouts
-hs.hotkey.bind(hyper, 'Return', function() hs.layout.apply(display_preferences) end)
+hs.hotkey.bind(hyper, '0', function() hs.layout.apply(display_preferences) end)
 
 -- Hotkeys to trigger open and/or focus applications
 hs.hotkey.bind(hyper, 'q', function() toggle_application('Sublime Text') end)
@@ -126,30 +129,6 @@ hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
 hs.hotkey.bind(hyper, 'f6', function() hs.spotify.playpause() end)
 hs.hotkey.bind(hyper, 'f7', function() hs.spotify.next() end)
-
--- function navigateBrowserWithMouseButtons()
---     local chrome = hs.appfinder.appFromName('Chrome')
---     if not chrome then
---         return
---     end
-
---     local lastapp = nil
---     if not skype:isFrontmost() then
---         lastapp = hs.application.frontmostApplication()
---         skype:activate()
---     end
-
---     if not skype:selectMenuItem({'Conversations', 'Mute Microphone'}) then
---         skype:selectMenuItem({'Conversations', 'Unmute Microphone'})
---     end
-
---     if lastapp then
---         lastapp:activate()
---     end
--- end
-
--- hs.eventtap.event.newMouseEvent(otherMouseUp)
-
 
 -- Reload config on change
 function reloadConfig(paths)
