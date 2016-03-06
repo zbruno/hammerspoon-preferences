@@ -7,6 +7,20 @@ local cornerNum = 1
 
 hs.window.animationDuration = 0.1
 
+hs.hotkey.bind(hyper, 'space', function()
+    local isFocused = hs.appfinder.appFromName('Google Chrome')
+    local isRFocused = isFocused:isFrontmost()
+ 
+    local log = hs.logger.new('mymodule','debug')
+    print(hs.screen.mainScreen())
+    for i=10,1,-1 do print(i) end
+end)
+
+hs.eventtap.new({otherMouseUp}, function()
+    local log = hs.logger.new('mymodule','debug')
+    log.i('lol')
+end)
+
 -- Toggle fullscreen of focused window
 function toggle_fullscreen()
     local win = hs.window.focusedWindow()
@@ -62,46 +76,32 @@ end
 -- Change size of active window
 function toggle_size(_direction)
     local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
 
     if _direction == 'left' then
         numRight = 0
         numLeft = numLeft + 1
 
         if numLeft == 1 then
-            f.w = (2 * max.w) / 3
+            win:moveToUnit(hs.layout.left70)
         elseif numLeft == 2 then
-            f.w = max.w / 2
+            win:moveToUnit(hs.layout.left50)
         elseif numLeft == 3 then
-            f.w = max.w / 3
+            win:moveToUnit(hs.layout.left30)
             numLeft = 0;
         end
 
-        f.x = max.x
-        f.y = max.y
-        f.h = max.h
-        win:setFrame(f)
     elseif _direction == 'right' then
         numLeft = 0
         numRight = numRight + 1
 
         if numRight == 1 then
-            f.w = (2 * max.w) / 3
-            f.x = max.x + (max.w / 3)
+            win:moveToUnit(hs.layout.right70)
         elseif numRight == 2 then
-            f.w = max.w / 2
-            f.x = max.x + (max.w / 2)
+            win:moveToUnit(hs.layout.right50)
         elseif numRight == 3 then
-            f.w = max.w / 3
-            f.x = max.x + (2 * max.w / 3)
+            win:moveToUnit(hs.layout.right30)
             numRight = 0
         end
-        
-        f.y = max.y
-        f.h = max.h
-        win:setFrame(f)
     end
 end
 
@@ -139,6 +139,30 @@ hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
 hs.hotkey.bind(hyper, 'f6', function() hs.spotify.playpause() end)
 hs.hotkey.bind(hyper, 'f7', function() hs.spotify.next() end)
+
+-- function navigateBrowserWithMouseButtons()
+--     local chrome = hs.appfinder.appFromName('Chrome')
+--     if not chrome then
+--         return
+--     end
+
+--     local lastapp = nil
+--     if not skype:isFrontmost() then
+--         lastapp = hs.application.frontmostApplication()
+--         skype:activate()
+--     end
+
+--     if not skype:selectMenuItem({'Conversations', 'Mute Microphone'}) then
+--         skype:selectMenuItem({'Conversations', 'Unmute Microphone'})
+--     end
+
+--     if lastapp then
+--         lastapp:activate()
+--     end
+-- end
+
+-- hs.eventtap.event.newMouseEvent(otherMouseUp)
+
 
 -- Reload config on change
 function reloadConfig(paths)
