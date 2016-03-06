@@ -1,39 +1,25 @@
 -- Define global modifier key of capslock
 local hyper = {'shift', 'ctrl', 'alt', 'cmd'}
 
-local numLeft = 0
-local numRight = 0
+-- Variables used for keeping track of position of windows
+local numSplit = 0
 local cornerNum = 1
 
+-- Configuration options
 hs.window.animationDuration = 0.1
 
-hs.hotkey.bind(hyper, 'space', function()
-    local isFocused = hs.appfinder.appFromName('Google Chrome')
-    local isRFocused = isFocused:isFrontmost()
- 
-    local log = hs.logger.new('mymodule','debug')
-    print(hs.screen.mainScreen())
-    for i=10,1,-1 do print(i) end
-end)
+hs.grid.setMargins(hs.geometry.new(nil, nil, 0, 0))
 
-hs.eventtap.new({otherMouseUp}, function()
-    local log = hs.logger.new('mymodule','debug')
-    log.i('lol')
-end)
+local screens = {
+  primary = hs.screen.primaryScreen(),
+  secondary =hs.screen.primaryScreen():previous()
+}
 
--- Toggle fullscreen of focused window
-function toggle_fullscreen()
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
-
-    f.x = max.x
-    f.y = max.y
-    f.w = max.w
-    f.h = max.h
-    win:setFrame(f)
-end
+local display_preferences = {
+    {"Sublime Text", nil, screens.secondary, hs.layout.left70, nil, nil},
+    {"iTerm", nil, screens.secondary, hs.layout.right30, nil, nil},
+    {"Google Chrome", nil, screens.primary, hs.layout.maximized, nil, nil}
+}
 
 -- Toggle corner placement of focused window
 function toggle_corner_placement(_direction)
@@ -78,29 +64,29 @@ function toggle_size(_direction)
     local win = hs.window.focusedWindow()
 
     if _direction == 'left' then
-        numRight = 0
-        numLeft = numLeft + 1
+        numSplit = 0
+        numSplit = numSplit + 1
 
-        if numLeft == 1 then
+        if numSplit == 1 then
             win:moveToUnit(hs.layout.left70)
-        elseif numLeft == 2 then
+        elseif numSplit == 2 then
             win:moveToUnit(hs.layout.left50)
-        elseif numLeft == 3 then
+        elseif numSplit == 3 then
             win:moveToUnit(hs.layout.left30)
-            numLeft = 0;
+            numSplit = 0;
         end
 
     elseif _direction == 'right' then
         numLeft = 0
-        numRight = numRight + 1
+        numSplit = numSplit + 1
 
-        if numRight == 1 then
+        if numSplit == 1 then
             win:moveToUnit(hs.layout.right70)
-        elseif numRight == 2 then
+        elseif numSplit == 2 then
             win:moveToUnit(hs.layout.right50)
-        elseif numRight == 3 then
+        elseif numSplit == 3 then
             win:moveToUnit(hs.layout.right30)
-            numRight = 0
+            numSplit = 0
         end
     end
 end
@@ -117,25 +103,26 @@ function set_up_work_environment()
     toggle_application('Google Chrome')
 end
 
-
-
+-- Hotkeys to trigger window management actions
 hs.hotkey.bind(hyper, 'Left', function() toggle_size('left') end)
 hs.hotkey.bind(hyper, 'Right', function() toggle_size('right') end)
-
 hs.hotkey.bind(hyper, 'Down', function() toggle_corner_placement('down') end)
 hs.hotkey.bind(hyper, 'Up', function() toggle_corner_placement('up') end)
-
 hs.hotkey.bind(hyper, 'pad1', function() hs.window.focusedWindow():moveOneScreenWest() end)
 hs.hotkey.bind(hyper, 'pad2', function() hs.window.focusedWindow():moveOneScreenEast() end)
+hs.hotkey.bind(hyper, 'f', function() hs.grid.maximizeWindow(hs.window.focusedWindow()) end)
 
-hs.hotkey.bind(hyper, 'f', function() toggle_fullscreen() end)
+-- Hotkeys to trigger defined layouts
+hs.hotkey.bind(hyper, 'Return', function() hs.layout.apply(display_preferences) end)
 
+-- Hotkeys to trigger open and/or focus applications
 hs.hotkey.bind(hyper, 'q', function() toggle_application('Sublime Text') end)
 hs.hotkey.bind(hyper, 'w', function() toggle_application('iTerm') end)
 hs.hotkey.bind(hyper, 'e', function() toggle_application('Google Chrome') end)
 hs.hotkey.bind(hyper, 'r', function() toggle_application('Sequel Pro') end)
 hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
 
+-- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
 hs.hotkey.bind(hyper, 'f6', function() hs.spotify.playpause() end)
 hs.hotkey.bind(hyper, 'f7', function() hs.spotify.next() end)
