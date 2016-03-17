@@ -16,89 +16,89 @@ local screens = {
 }
 
 local display_preferences = {
-    {"Sublime Text", nil, screens.secondary, hs.layout.left70, nil, nil},
-    {"iTerm", nil, screens.secondary, hs.layout.right30, nil, nil},
-    {"Google Chrome", nil, screens.primary, hs.layout.maximized, nil, nil}
+  {"Sublime Text", nil, screens.secondary, hs.layout.left70, nil, nil},
+  {"iTerm", nil, screens.secondary, hs.layout.right30, nil, nil},
+  {"Google Chrome", nil, screens.primary, hs.layout.maximized, nil, nil}
 }
 
 -- Toggle corner placement of focused window
 function toggle_corner_placement(_direction)
-    local win = hs.window.focusedWindow()
-    local f = win:frame()
-    local screen = win:screen()
-    local max = screen:frame()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
 
-    local positions = {
-      {},
-      {w = max.w/3},
-      {x = max.x + (max.w/2)},
-      {w = max.w/3, x = max.x + (2*max.w/3)},
-      {y = max.y + (max.h/2)},
-      {w = max.w/3, y = max.y + (max.h/2)},
-      {x = max.x + (max.w/2), y = max.y + (max.h/2)},
-      {w = max.w/3, x = max.x + (2*max.w/3), y = max.y + (max.h/2)}
-    }
+  local positions = {
+    {},
+    {w = max.w/3},
+    {x = max.x + (max.w/2)},
+    {w = max.w/3, x = max.x + (2*max.w/3)},
+    {y = max.y + (max.h/2)},
+    {w = max.w/3, y = max.y + (max.h/2)},
+    {x = max.x + (max.w/2), y = max.y + (max.h/2)},
+    {w = max.w/3, x = max.x + (2*max.w/3), y = max.y + (max.h/2)}
+  }
 
-    if (_direction == 'down') then
-      if (cornerNum == 1) then
-        cornerNum = 2
-      end
-      cornerNum = cornerNum - 1
-    else
-      if (cornerNum == 8) then
-        cornerNum = 7
-      end
-      cornerNum = cornerNum + 1
+  if (_direction == 'down') then
+    if (cornerNum == 1) then
+      cornerNum = 2
     end
+    cornerNum = cornerNum - 1
+  else
+    if (cornerNum == 8) then
+      cornerNum = 7
+    end
+    cornerNum = cornerNum + 1
+  end
 
-    f.x = positions[cornerNum].x or max.x
-    f.y = positions[cornerNum].y or max.y
-    f.w = positions[cornerNum].w or max.w/2
-    f.h = positions[cornerNum].h or max.h/2
+  f.x = positions[cornerNum].x or max.x
+  f.y = positions[cornerNum].y or max.y
+  f.w = positions[cornerNum].w or max.w/2
+  f.h = positions[cornerNum].h or max.h/2
 
-    win:setFrame(f)
+  win:setFrame(f)
 end
 
 -- Change size of active window
 function toggle_size(_direction)
-    local win = hs.window.focusedWindow()
+  local win = hs.window.focusedWindow()
 
-    if _direction == 'left' then
-        numSplit = numSplit + 1
+  if _direction == 'left' then
+    numSplit = numSplit + 1
 
-        if numSplit == 1 then
-            win:moveToUnit(hs.layout.left70)
-        elseif numSplit == 2 then
-            win:moveToUnit(hs.layout.left50)
-        elseif numSplit == 3 then
-            win:moveToUnit(hs.layout.left30)
-            numSplit = 0;
-        end
-
-    elseif _direction == 'right' then
-        numSplit = numSplit + 1
-
-        if numSplit == 1 then
-            win:moveToUnit(hs.layout.right70)
-        elseif numSplit == 2 then
-            win:moveToUnit(hs.layout.right50)
-        elseif numSplit == 3 then
-            win:moveToUnit(hs.layout.right30)
-            numSplit = 0
-        end
+    if numSplit == 1 then
+      win:moveToUnit(hs.layout.left70)
+    elseif numSplit == 2 then
+      win:moveToUnit(hs.layout.left50)
+    elseif numSplit == 3 then
+      win:moveToUnit(hs.layout.left30)
+      numSplit = 0;
     end
+
+  elseif _direction == 'right' then
+    numSplit = numSplit + 1
+
+    if numSplit == 1 then
+      win:moveToUnit(hs.layout.right70)
+    elseif numSplit == 2 then
+      win:moveToUnit(hs.layout.right50)
+    elseif numSplit == 3 then
+      win:moveToUnit(hs.layout.right30)
+      numSplit = 0
+    end
+  end
 end
 
 -- Bring specifc applications to focus
 function toggle_application(_app)
-    hs.application.launchOrFocus(_app)
+  hs.application.launchOrFocus(_app)
 end
 
 -- Set up work environment
 function set_up_work_environment()
-    toggle_application('Sublime Text')
-    toggle_application('iTerm')
-    toggle_application('Google Chrome')
+  toggle_application('Sublime Text')
+  toggle_application('iTerm')
+  toggle_application('Google Chrome')
 end
 
 -- Set up work environment
@@ -147,14 +147,14 @@ hs.hotkey.bind(hyper, '-', function() change_system_volume('down') end)
 
 -- Reload config on change
 function reloadConfig(paths)
-    doReload = false
-    for _,file in pairs(paths) do
-        if file:sub(-4) == '.lua' then
-            print('reloading hammerspoon config')
-            doReload = true
-            hs.reload()
-        end 
-    end
+  doReload = false
+  for _,file in pairs(paths) do
+    if file:sub(-4) == '.lua' then
+      print('reloading hammerspoon config')
+      doReload = true
+      hs.reload()
+    end 
+  end
 end
 
 configFileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
