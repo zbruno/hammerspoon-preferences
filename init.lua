@@ -101,6 +101,19 @@ function set_up_work_environment()
     toggle_application('Google Chrome')
 end
 
+-- Set up work environment
+function change_system_volume(direction)
+  local curVol = hs.audiodevice.defaultOutputDevice():volume()
+
+  if (direction == 'up') then
+    curVol = curVol + 5
+    hs.audiodevice.defaultOutputDevice():setVolume(curVol)
+  elseif (direction == 'down') then
+    curVol = curVol - 5
+    hs.audiodevice.defaultOutputDevice():setVolume(curVol)
+  end
+end
+
 -- Hotkeys to trigger window management actions
 hs.hotkey.bind(hyper, 'Left', function() toggle_size('left') end)
 hs.hotkey.bind(hyper, 'Right', function() toggle_size('right') end)
@@ -127,6 +140,10 @@ hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
 hs.hotkey.bind(hyper, 'f6', function() hs.spotify.playpause() end)
 hs.hotkey.bind(hyper, 'f7', function() hs.spotify.next() end)
+
+-- Hotkeys to trigger Volumne Actions (For when not using Mac Keyboard)
+hs.hotkey.bind(hyper, '=', function() change_system_volume('up') end)
+hs.hotkey.bind(hyper, '-', function() change_system_volume('down') end)
 
 -- Reload config on change
 function reloadConfig(paths)
