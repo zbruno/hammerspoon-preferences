@@ -16,9 +16,9 @@ local screens = {
 }
 
 local display_preferences = {
-  {"Sublime Text", nil, screens.secondary, hs.layout.left70, nil, nil},
-  {"iTerm", nil, screens.secondary, hs.layout.right30, nil, nil},
-  {"Google Chrome", nil, screens.primary, hs.layout.maximized, nil, nil}
+  {'Sublime Text', nil, screens.secondary, hs.layout.left70, nil, nil},
+  {'iTerm', nil, screens.secondary, hs.layout.right30, nil, nil},
+  {'Google Chrome', nil, screens.primary, hs.layout.maximized, nil, nil}
 }
 
 -- Toggle corner placement of focused window
@@ -159,7 +159,7 @@ function reloadConfig(paths)
   end
 end
 
-configFileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
+configFileWatcher = hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig)
 configFileWatcher:start()
 
 -- Notify that config is loaded and Hammerspoon is working
