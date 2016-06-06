@@ -135,6 +135,8 @@ hs.hotkey.bind(hyper, 'w', function() toggle_application('iTerm') end)
 hs.hotkey.bind(hyper, 'e', function() toggle_application('Google Chrome') end)
 hs.hotkey.bind(hyper, 'r', function() toggle_application('Sequel Pro') end)
 hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
+hs.hotkey.bind(hyper, 'a', function() toggle_application('Slack') end)
+hs.hotkey.bind(hyper, 's', function() toggle_application('Spotify') end)
 
 -- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
