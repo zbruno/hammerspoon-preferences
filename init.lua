@@ -139,7 +139,8 @@ hs.hotkey.bind(hyper, 'a', function() toggle_application('Slack') end)
 hs.hotkey.bind(hyper, 's', function() toggle_application('Spotify') end)
 hs.hotkey.bind(hyper, 'd', function() toggle_application('Dashlane') end)
 hs.hotkey.bind(hyper, 'u', function() toggle_application('Unity') end)
-hs.hotkey.bind(hyper, 'm', function() toggle_application('MonoDevelop') end)
+hs.hotkey.bind(hyper, 'i', function() toggle_application('MonoDevelop') end)
+hs.hotkey.bind(hyper, 'm', function() toggle_application('Messages') end)
 
 -- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
