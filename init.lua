@@ -141,6 +141,7 @@ hs.hotkey.bind(hyper, 'd', function() toggle_application('1Password') end)
 hs.hotkey.bind(hyper, 'u', function() toggle_application('Unity') end)
 hs.hotkey.bind(hyper, 'i', function() toggle_application('MonoDevelop') end)
 hs.hotkey.bind(hyper, 'm', function() toggle_application('Messages') end)
+hs.hotkey.bind(hyper, 'z', function() toggle_application('Sketch') end)
 
 -- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
