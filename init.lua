@@ -35,9 +35,6 @@ local hyper = {'shift', 'ctrl', 'alt', 'cmd'}
   --   send ESCAPE if no other keys are pressed.
   releasedF18 = function()
     k:exit()
-    if not k.triggered then
-      hs.eventtap.keyStroke({}, 'ESCAPE')
-    end
   end
 
   -- Bind the Hyper key
