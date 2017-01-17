@@ -1,46 +1,6 @@
 -- Define global modifier key of capslock
 local hyper = {'shift', 'ctrl', 'alt', 'cmd'}
 
--- START HACKS TO FIX MAC OS SIERRA STUFF
-  -- A global variable for the sub-key Hyper Mode
-  k = hs.hotkey.modal.new({}, 'F17')
-
-  -- Redeclare all hotkey that I use
-  hyperBindings = {
-    'Left', 'Right', 'Down', 'Up',
-    'pad1', 'pad2',
-    'f', '9', '0',
-    'q', 'w', 'e', 'r', 't',
-    'a', 's', 'd',
-    'u', 'i',
-    'm', 'z',
-    'f5', 'f6', 'f7',
-    '=', '-'
-  }
-
-  -- For each hotkey, trigger hyper plus key events
-  for i,key in ipairs(hyperBindings) do
-    k:bind({}, key, nil, function() hs.eventtap.keyStroke(hyper, key)
-      k.triggered = true
-    end)
-  end
-
-  -- Enter Hyper Mode when F19 (left control) is pressed
-  pressedF18 = function()
-    k.triggered = false
-    k:enter()
-  end
-
-  -- Leave Hyper Mode when F18 (left control) is pressed,
-  --   send ESCAPE if no other keys are pressed.
-  releasedF18 = function()
-    k:exit()
-  end
-
-  -- Bind the Hyper key
-  f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
--- END HACKS TO FIX MAC OS SIERRA STUFF
-
 -- Variables used for keeping track of position of windows
 local numSplit = 0
 local cornerNum = 1
