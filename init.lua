@@ -15,7 +15,7 @@ local screens = {
 }
 
 local display_preferences = {
-  {'Sublime Text', nil, screens.secondary, hs.layout.left70, nil, nil},
+  {'PhpStorm', nil, screens.secondary, hs.layout.left70, nil, nil},
   {'iTerm', nil, screens.secondary, hs.layout.right30, nil, nil},
   {'Google Chrome', nil, screens.primary, hs.layout.maximized, nil, nil}
 }
@@ -95,7 +95,7 @@ end
 
 -- Set up work environment
 function set_up_work_environment()
-  toggle_application('Sublime Text')
+  toggle_application('PhpStorm')
   toggle_application('iTerm')
   toggle_application('Google Chrome')
 end
@@ -129,7 +129,7 @@ hs.hotkey.bind(hyper, '9', function() set_up_work_environment() end)
 hs.hotkey.bind(hyper, '0', function() hs.layout.apply(display_preferences) end)
 
 -- Hotkeys to trigger open and/or focus applications
-hs.hotkey.bind(hyper, 'q', function() toggle_application('Sublime Text') end)
+hs.hotkey.bind(hyper, 'q', function() toggle_application('PhpStorm') end)
 hs.hotkey.bind(hyper, 'w', function() toggle_application('iTerm') end)
 hs.hotkey.bind(hyper, 'e', function() toggle_application('Google Chrome') end)
 hs.hotkey.bind(hyper, 'r', function() toggle_application('Sequel Pro') end)
