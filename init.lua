@@ -138,6 +138,7 @@ hs.hotkey.bind(hyper, 'a', function() toggle_application('Slack') end)
 hs.hotkey.bind(hyper, 's', function() toggle_application('Spotify') end)
 hs.hotkey.bind(hyper, 'm', function() toggle_application('Messages') end)
 hs.hotkey.bind(hyper, 'z', function() toggle_application('Sketch') end)
+hs.hotkey.bind(hyper, 'n', function() toggle_application('Notion') end)
 
 -- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
