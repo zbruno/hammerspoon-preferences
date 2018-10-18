@@ -136,9 +136,12 @@ hs.hotkey.bind(hyper, 'r', function() toggle_application('Sequel Pro') end)
 hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
 hs.hotkey.bind(hyper, 'a', function() toggle_application('Slack') end)
 hs.hotkey.bind(hyper, 's', function() toggle_application('Spotify') end)
-hs.hotkey.bind(hyper, 'm', function() toggle_application('Messages') end)
+hs.hotkey.bind(hyper, 'd', function() toggle_application('Things') end)
 hs.hotkey.bind(hyper, 'z', function() toggle_application('Sketch') end)
+hs.hotkey.bind(hyper, 'x', function() toggle_application('Trello') end)
+hs.hotkey.bind(hyper, 'c', function() toggle_application('Fantastical 2') end)
 hs.hotkey.bind(hyper, 'n', function() toggle_application('Notion') end)
+hs.hotkey.bind(hyper, 'm', function() toggle_application('Messages') end)
 
 -- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
