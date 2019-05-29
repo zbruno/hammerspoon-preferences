@@ -5,20 +5,34 @@ local hyper = {'shift', 'ctrl', 'alt', 'cmd'}
 local numSplit = 0
 local cornerNum = 1
 
+-- Variables for Chrome Tabs
+local appsArray = {
+  {'LocalHost', 'l', 'browser'},
+  {'Gmail', 'g', 'browser'},
+  {'Calendar', 'c', 'browser'},
+  {'Slack', 'a', 'browser'},
+  {'Notion', 'n', 'browser'},
+  {'Trello', 'x', 'browser'},
+  {'Amplitude', 'v', 'browser'},
+  {'ProductBoard', 'p', 'browser'},
+  {'Figma', 'z', 'browser'},
+  {'PhpStorm', 'q', 'app'},
+  {'iTerm', 'w', 'app'},
+  {'Google Chrome', 'e', 'app'},
+  {'Sequel Pro', 'r', 'app'},
+  {'Tower', 't', 'app'},
+  {'Spotify', 's', 'app'},
+  {'Things3', 'd', 'app'},
+  {'Messages', 'm', 'app'},
+}
+for k,v in pairs(appsArray) do
+   hs.hotkey.bind(hyper, v[2], function() focus_a_thing(v, k) end)
+end
+
+
 -- Configuration options
 hs.window.animationDuration = 0.1
 hs.grid.setMargins(hs.geometry.new(nil, nil, 0, 0))
-
-local screens = {
-  primary = hs.screen.primaryScreen(),
-  secondary = hs.screen.primaryScreen():previous()
-}
-
-local display_preferences = {
-  {'PhpStorm', nil, screens.secondary, hs.layout.left70, nil, nil},
-  {'iTerm', nil, screens.secondary, hs.layout.right30, nil, nil},
-  {'Google Chrome', nil, screens.primary, hs.layout.maximized, nil, nil}
-}
 
 -- Toggle corner placement of focused window
 function toggle_corner_placement(_direction)
@@ -88,19 +102,7 @@ function toggle_size(_direction)
   end
 end
 
--- Bring specifc applications to focus
-function toggle_application(_app)
-  hs.application.launchOrFocus(_app)
-end
-
--- Set up work environment
-function set_up_work_environment()
-  toggle_application('PhpStorm')
-  toggle_application('iTerm')
-  toggle_application('Google Chrome')
-end
-
--- Set up work environment
+-- Change volume
 function change_system_volume(direction)
   local curVol = hs.audiodevice.defaultOutputDevice():volume()
 
@@ -113,6 +115,31 @@ function change_system_volume(direction)
   end
 end
 
+-- Bring specifc applications to focus
+function focus_application(_app)
+  hs.application.launchOrFocus(_app)
+end
+
+function focus_tab(index)
+  focus_application('Google Chrome')
+
+  if (index > 8) then
+    hs.eventtap.keyStroke('cmd', '8')
+    hs.eventtap.keyStroke('ctrl', 'tab')
+  else
+    hs.eventtap.keyStroke('cmd', tostring(index))
+  end
+end
+
+-- Open App
+function focus_a_thing(value, index)
+  if (value[3] == 'browser') then
+    focus_tab(index)
+  else
+    focus_application(value[1])
+  end
+end
+
 -- Hotkeys to trigger window management actions
 hs.hotkey.bind(hyper, 'Left', function() toggle_size('left') end)
 hs.hotkey.bind(hyper, 'Right', function() toggle_size('right') end)
@@ -121,27 +148,6 @@ hs.hotkey.bind(hyper, 'Up', function() toggle_corner_placement('up') end)
 hs.hotkey.bind(hyper, 'pad1', function() hs.window.focusedWindow():moveOneScreenWest() end)
 hs.hotkey.bind(hyper, 'pad2', function() hs.window.focusedWindow():moveOneScreenEast() end)
 hs.hotkey.bind(hyper, 'f', function() hs.grid.maximizeWindow(hs.window.focusedWindow()) end)
-
--- Open all work apps
-hs.hotkey.bind(hyper, '9', function() set_up_work_environment() end)
-
--- Hotkeys to trigger defined layouts
-hs.hotkey.bind(hyper, '0', function() hs.layout.apply(display_preferences) end)
-
--- Hotkeys to trigger open and/or focus applications
-hs.hotkey.bind(hyper, 'q', function() toggle_application('PhpStorm') end)
-hs.hotkey.bind(hyper, 'w', function() toggle_application('iTerm') end)
-hs.hotkey.bind(hyper, 'e', function() toggle_application('Google Chrome') end)
-hs.hotkey.bind(hyper, 'r', function() toggle_application('Sequel Pro') end)
-hs.hotkey.bind(hyper, 't', function() toggle_application('Tower') end)
-hs.hotkey.bind(hyper, 'a', function() toggle_application('Slack') end)
-hs.hotkey.bind(hyper, 's', function() toggle_application('Spotify') end)
-hs.hotkey.bind(hyper, 'd', function() toggle_application('Things') end)
-hs.hotkey.bind(hyper, 'z', function() toggle_application('Sketch') end)
-hs.hotkey.bind(hyper, 'x', function() toggle_application('Trello') end)
-hs.hotkey.bind(hyper, 'c', function() toggle_application('Fantastical 2') end)
-hs.hotkey.bind(hyper, 'n', function() toggle_application('Notion') end)
-hs.hotkey.bind(hyper, 'm', function() toggle_application('Messages') end)
 
 -- Hotkeys to trigger Spotify Actions
 hs.hotkey.bind(hyper, 'f5', function() hs.spotify.previous() end)
@@ -160,7 +166,7 @@ function reloadConfig(paths)
       print('reloading hammerspoon config')
       doReload = true
       hs.reload()
-    end 
+    end
   end
 end
 
