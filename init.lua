@@ -7,22 +7,16 @@ local cornerNum = 1
 
 -- Variables for Chrome Tabs
 local appsArray = {
-  {'LocalHost', 'l', 'browser'},
-  {'Gmail', 'g', 'browser'},
+  {'Gmail', 'd', 'browser'},
   {'Calendar', 'c', 'browser'},
   {'Slack', 'a', 'browser'},
-  {'Notion', 'n', 'browser'},
-  {'Trello', 'x', 'browser'},
-  {'Amplitude', 'v', 'browser'},
-  {'ProductBoard', 'p', 'browser'},
-  {'Figma', 'z', 'browser'},
-  {'PhpStorm', 'q', 'app'},
+  {'Sublime Text', 'q', 'app'},
   {'iTerm', 'w', 'app'},
   {'Google Chrome', 'e', 'app'},
   {'Sequel Pro', 'r', 'app'},
   {'Tower', 't', 'app'},
   {'Spotify', 's', 'app'},
-  {'Things3', 'd', 'app'},
+  {'Things3', 'f', 'app'},
   {'Messages', 'm', 'app'},
 }
 for k,v in pairs(appsArray) do
